@@ -15,8 +15,8 @@ const getAll = async (req, res, next) => {
 }
 const post = async (req, res, next) => {
     try {
-        const { name, details, price, quantity } = req.body;
-        await productModel.create({ name, details, price, quantity });
+        const { name, details, price, quantity, uid } = req.body;
+        await productModel.create({ name, details, price, quantity, uid });
         return res.status(200).json(
             {
                 message: "Successfully added the product"

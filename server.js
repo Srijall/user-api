@@ -12,6 +12,7 @@ const passport = require('passport');
 const { authenticate } = require('./utils/authenticate');
 const { productController } = require('./controller/product-controller');
 
+require('dotenv').config();
 
 // check connection to database
 let connection = async () => {
@@ -31,7 +32,7 @@ registerModel(db);
 // express app 
 const app = express();
 app.use(express.json());
-const PORT = 3000;
+const PORT = process.env.DEV_PORT;
 
 app.use(passport.initialize());
 

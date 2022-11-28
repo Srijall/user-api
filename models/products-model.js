@@ -22,6 +22,15 @@ const productModel = db.define("product_Table",
         quantity: {
             type: DataTypes.INTEGER,
             allowNull: false
+        },
+        uid: {
+            type: DataTypes.INTEGER,
+
+            references:
+            {
+                model: "user_table",
+                key: "uid"
+            }
         }
     }, { freezeTableName: true, timestamps: false })
 
