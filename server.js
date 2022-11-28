@@ -4,9 +4,13 @@ const db = require('./config/db_config');
 const { blogController } = require('./controller/blog-controller');
 const { profileController } = require('./controller/profile-controller');
 const { userController } = require('./controller/user-controller');
+const { loginController } = require('./controller/login-controller');
 const notfound = require('./exception/notfound');
 const errorException = require('./exception/error.exception');
 const { registerModel } = require('./models/index-models');
+const passport = require('passport');
+const { authenticate } = require('./utils/authenticate');
+const { productController } = require('./controller/product-controller');
 
 
 // check connection to database
@@ -29,12 +33,15 @@ const app = express();
 app.use(express.json());
 const PORT = 3000;
 
+app.use(passport.initialize());
 
+authenticate(passport)
 // controllers
 userController(app);
 profileController(app);
 blogController(app);
-
+productController(app);
+loginController(app, passport);
 // error middleware
 app.use(notfound)
 app.use(errorException)

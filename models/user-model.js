@@ -15,8 +15,8 @@ const userModel = db.define('user_table', {
         type: DataTypes.STRING(50),
         allowNull: false
     },
-    about: {
-        type: DataTypes.STRING(550),
+    password: {
+        type: DataTypes.STRING(50),
         allowNull: false
     }
 }, { freezeTableName: true, timestamps: false })

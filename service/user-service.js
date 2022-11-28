@@ -1,6 +1,6 @@
 const userModel = require("../models/user-model.js")
 
-exports.getAll = async (req, res) => {
+exports.getAll = async (req, res, next) => {
     try {
         const userData = await userModel.findAll();
         return res.status(200).json({ users: userData })
@@ -8,10 +8,10 @@ exports.getAll = async (req, res) => {
         next(error)
     }
 }
-exports.post = async (req, res) => {
+exports.post = async (req, res, next) => {
     try {
-        const { name, email, about } = req.body;
-        await userModel.create({ name, email, about });
+        const { name, email, password } = req.body;
+        await userModel.create({ name, email, password });
         return res.status(200).json({ message: 'data inserted successfully' })
 
     } catch (error) {
@@ -35,8 +35,8 @@ exports.getOne = async (req, res) => {
 exports.update = async (req, res) => {
     try {
         const { uid } = req.params;
-        const { name, email, about } = req.body;
-        await userModel.update({ name, email, about }, { where: { uid } })
+        const { name, email, password } = req.body;
+        await userModel.update({ name, email, password }, { where: { uid } })
         return res.status(200).json({
             message: 'Updated Successfully'
         })

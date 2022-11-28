@@ -28,6 +28,8 @@ module.exports = {
         references: {
           model: { tableName: 'user_table' },
           key: 'uid',
+          onUpdate: 'CASCADE',
+          onDelete: 'SET NULL',
         },
       }
     })

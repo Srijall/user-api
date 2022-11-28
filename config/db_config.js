@@ -1,12 +1,13 @@
 const { Sequelize } = require('sequelize');
-
+require('dotenv').config();
+// require('dotenv').config({ path: './.dev.env' }); //to use custom name env 
 const db = new Sequelize({
-    database: process.env.DB_NAME || 'infodev-user',
-    username: process.env.USER || 'postgres',
-    password: process.env.PASSWORD || 'nimesh12',
+    database: process.env.DB_NAME,
+    username: process.env.USER,
+    password: process.env.PASSWORD,
     dialect: 'postgres',
-    port: process.env.DB_PORT || 5432,
-    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT,
+    host: process.env.DB_HOST,
     logging: true
 })
 module.exports = db;

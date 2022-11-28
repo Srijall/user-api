@@ -1,7 +1,7 @@
 const profileModel = require("../models/user-profile.js")
 const { diskStorage } = require("multer");
 const multer = require('multer')
-const DatabaseFilename = require('../controller/profile-controller')
+const DBFilename = require('../utils/fileUploadMiddelware')
 exports.getAll = async (req, res, next) => {
     try {
         const userPData = await profileModel.findAll();
@@ -15,10 +15,12 @@ exports.getAll = async (req, res, next) => {
 
 exports.post = async (req, res, next) => {
     try {
-        const { uid, profilePic, occupation } = req.body;
-        console.log({ uid, profilePic, occupation })
-        await profileModel.findOne({ where: { uid } }) ?
-            next('Profile already exists') : null
+        const { uid, occupation } = req.body;
+        const profilePic = req.file.originalname;
+        console.log({ uid, profilePic, occupation });
+        // await profileModel.findOne({ where: { uid } }) ?
+        // next('Profile already exists') : null;
+        console.log('name ', req.file.originalname)
 
         await profileModel.create({ uid, profilePic, occupation });
 
